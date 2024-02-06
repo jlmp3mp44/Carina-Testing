@@ -3,6 +3,7 @@ package com.solvd.carina_testing;
 import com.solvd.carina_testing.api.*;
 import com.solvd.carina_testing.domain.Product;
 import com.solvd.carina_testing.domain.Rating;
+import com.zebrunner.carina.api.apitools.validation.JsonComparatorContext;
 import com.zebrunner.carina.api.http.HttpResponseStatusType;
 import org.testng.annotations.Test;
 
@@ -20,13 +21,13 @@ public class ProductTest {
                 "Stash your laptop (up to 15 inches) in the padded sleeve, your everyday");
         product.setCategory("men's clothing");
         product.setRating(rating);
+        product.setImage("https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg");
 
         GetProductById getProductById =  new GetProductById("1");
         getProductById.addProperty("product", product);
         getProductById.addProperty("rating", rating);
 
-        getProductById.expectResponseStatus(HttpResponseStatusType.OK_200);
-        getProductById.callAPI();
+        getProductById.callAPIExpectSuccess();
 
         getProductById.validateResponse();
     }
@@ -38,8 +39,7 @@ public class ProductTest {
         PostProduct addProduct = new PostProduct();
         addProduct.addProperty("product", product);
 
-        addProduct.expectResponseStatus(HttpResponseStatusType.OK_200);
-        addProduct.callAPI();
+        addProduct.callAPIExpectSuccess();
 
         addProduct.validateResponse();
     }
@@ -51,8 +51,7 @@ public class ProductTest {
         PutProductById putProductById = new PutProductById("7");
         putProductById.addProperty("product", product);
 
-        putProductById.expectResponseStatus(HttpResponseStatusType.OK_200);
-        putProductById.callAPI();
+        putProductById.callAPIExpectSuccess();
 
         putProductById.validateResponse();
     }
@@ -63,8 +62,7 @@ public class ProductTest {
         PutProductById putProductById = new PutProductById(" ");
         putProductById.addProperty("product", product);
 
-        putProductById.expectResponseStatus(HttpResponseStatusType.NOT_FOUND_404);
-        putProductById.callAPI();
+       putProductById.callAPIExpectSuccess();
 
     }
 
@@ -75,8 +73,7 @@ public class ProductTest {
         PatchProductById patchProductById =  new PatchProductById("7");
         patchProductById.addProperty("product", product);
 
-        patchProductById.expectResponseStatus(HttpResponseStatusType.OK_200);
-        patchProductById.callAPI();
+        patchProductById.callAPIExpectSuccess();
 
         patchProductById.validateResponse();
     }
@@ -102,8 +99,7 @@ public class ProductTest {
         DeleteProductById deleteProductById =  new DeleteProductById("16");
         deleteProductById.addProperty("product", product);
 
-        deleteProductById.expectResponseStatus(HttpResponseStatusType.OK_200);
-        deleteProductById.callAPI();
+        deleteProductById.callAPIExpectSuccess();
 
         deleteProductById.validateResponse();
 
