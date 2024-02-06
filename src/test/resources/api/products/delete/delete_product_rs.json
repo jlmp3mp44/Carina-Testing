@@ -1,0 +1,12 @@
+{
+  "id": "type:Integer",
+  "title": "${product.title}",
+  "price": "type:Double",
+  "description": "${product.description}",
+  "category": "${product.category}",
+  "image": "skip",
+  "rating": {
+    "rate": "type:Double",
+    "count": "type:Integer"
+  }
+}
