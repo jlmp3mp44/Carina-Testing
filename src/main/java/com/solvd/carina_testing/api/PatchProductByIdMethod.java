@@ -13,8 +13,8 @@ import com.zebrunner.carina.api.http.HttpResponseStatusType;
 @RequestTemplatePath(path = "api/products/patch/patch_product_rq.json")
 @ResponseTemplatePath(path = "api/products/patch/patch_product_rs.json")
 @SuccessfulHttpStatus(status = HttpResponseStatusType.OK_200)
-public class PatchProductById extends AbstractApiMethodV2 {
-    public PatchProductById(String id) {
+public class PatchProductByIdMethod extends AbstractApiMethodV2 {
+    public PatchProductByIdMethod(String id) {
         replaceUrlPlaceholder("id", id);
         ignorePropertiesProcessor(NotStringValuesProcessor.class);
     }

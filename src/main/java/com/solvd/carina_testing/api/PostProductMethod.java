@@ -9,13 +9,12 @@ import com.zebrunner.carina.api.apitools.builder.NotStringValuesProcessor;
 import com.zebrunner.carina.api.http.HttpMethodType;
 import com.zebrunner.carina.api.http.HttpResponseStatusType;
 
-@Endpoint(url = "${config.api_url}/products/${id}", methodType = HttpMethodType.PUT)
-@RequestTemplatePath(path = "api/products/put/put_product_rq.json")
-@ResponseTemplatePath(path = "api/products/put/put_product_rs.json")
+@Endpoint(url = "${config.api_url}/products", methodType = HttpMethodType.POST)
+@RequestTemplatePath(path = "api/products/post/post_product_rq.json")
+@ResponseTemplatePath(path = "api/products/post/post_product_rs.json")
 @SuccessfulHttpStatus(status = HttpResponseStatusType.OK_200)
-public class PutProductById extends AbstractApiMethodV2 {
-    public PutProductById(String id) {
-        replaceUrlPlaceholder("id",id);
+public class PostProductMethod extends AbstractApiMethodV2 {
+    public PostProductMethod() {
         ignorePropertiesProcessor(NotStringValuesProcessor.class);
     }
 }

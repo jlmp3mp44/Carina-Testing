@@ -22,7 +22,7 @@ public class ProductTest {
         product.setRating(rating);
         product.setImage("https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg");
 
-        GetProductById getProductById = new GetProductById("1");
+        GetProductByIdMethod getProductById = new GetProductByIdMethod("1");
         getProductById.addProperty("product", product);
         getProductById.addProperty("rating", rating);
 
@@ -35,7 +35,7 @@ public class ProductTest {
     public void verifyProductPostWithValidDataTest() {
         Product product = createDefaultProduct();
 
-        PostProduct addProduct = new PostProduct();
+        PostProductMethod addProduct = new PostProductMethod();
         addProduct.addProperty("product", product);
 
         addProduct.callAPIExpectSuccess();
@@ -47,7 +47,7 @@ public class ProductTest {
     public void verifyPutProductWithValidDataTest() {
         Product product = createDefaultProduct();
 
-        PutProductById putProductById = new PutProductById("7");
+        PutProductByIdMethod putProductById = new PutProductByIdMethod("7");
         putProductById.addProperty("product", product);
 
         putProductById.callAPIExpectSuccess();
@@ -59,7 +59,7 @@ public class ProductTest {
     public void verifyPutProductWithInvalidDataTest() {
         Product product = createDefaultProduct();
 
-        PutProductById putProductById = new PutProductById(" ");
+        PutProductByIdMethod putProductById = new PutProductByIdMethod(" ");
         putProductById.addProperty("product", product);
 
         putProductById.expectResponseStatus(HttpResponseStatusType.NOT_FOUND_404);
@@ -70,7 +70,7 @@ public class ProductTest {
     public void verifyPatchProductWithValidDataTest() {
         Product product = createDefaultProduct();
 
-        PatchProductById patchProductById = new PatchProductById("7");
+        PatchProductByIdMethod patchProductById = new PatchProductByIdMethod("7");
         patchProductById.addProperty("product", product);
 
         patchProductById.callAPIExpectSuccess();
@@ -96,8 +96,9 @@ public class ProductTest {
         product.setImage("https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_.jpg");
         product.setRating(rating);
 
-        DeleteProductById deleteProductById = new DeleteProductById("16");
+        DeleteProductByIdMethod deleteProductById = new DeleteProductByIdMethod("16");
         deleteProductById.addProperty("product", product);
+        deleteProductById.addProperty("rating", rating);
 
         deleteProductById.callAPIExpectSuccess();
 

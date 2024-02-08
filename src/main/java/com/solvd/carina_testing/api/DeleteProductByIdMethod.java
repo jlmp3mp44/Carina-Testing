@@ -2,19 +2,18 @@ package com.solvd.carina_testing.api;
 
 import com.zebrunner.carina.api.AbstractApiMethodV2;
 import com.zebrunner.carina.api.annotation.Endpoint;
-import com.zebrunner.carina.api.annotation.RequestTemplatePath;
 import com.zebrunner.carina.api.annotation.ResponseTemplatePath;
 import com.zebrunner.carina.api.annotation.SuccessfulHttpStatus;
 import com.zebrunner.carina.api.apitools.builder.NotStringValuesProcessor;
 import com.zebrunner.carina.api.http.HttpMethodType;
 import com.zebrunner.carina.api.http.HttpResponseStatusType;
 
-@Endpoint(url = "${config.api_url}/products", methodType = HttpMethodType.POST)
-@RequestTemplatePath(path = "api/products/post/post_product_rq.json")
-@ResponseTemplatePath(path = "api/products/post/post_product_rs.json")
+@Endpoint(url = "${config.api_url}/products/${id}", methodType = HttpMethodType.DELETE)
+@ResponseTemplatePath(path = "api/products/delete/delete_product_rs.json")
 @SuccessfulHttpStatus(status = HttpResponseStatusType.OK_200)
-public class PostProduct extends AbstractApiMethodV2 {
-    public PostProduct() {
+public class DeleteProductByIdMethod extends AbstractApiMethodV2 {
+    public DeleteProductByIdMethod(String id) {
+        replaceUrlPlaceholder("id", id);
         ignorePropertiesProcessor(NotStringValuesProcessor.class);
     }
 }
