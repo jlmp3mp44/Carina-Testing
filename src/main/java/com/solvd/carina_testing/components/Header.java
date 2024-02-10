@@ -7,13 +7,22 @@ import org.openqa.selenium.support.FindBy;
 
 public class Header extends AbstractUIObject {
 
+
+
     @FindBy(xpath = "//*[@data-v-f0f2c96e]//*[@class='m-search-bar__wrapper']")
     private SearchLineComponent searchLineComponent;
+
+    @FindBy(xpath = "//*[@class='nav-horizontal']")
+    private PropositionLine propositionLine;
     public Header(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
     public SearchLineComponent getSearchLineComponent() {
         return searchLineComponent;
+    }
+
+    public PropositionLine getPropositionLine() {
+        return propositionLine;
     }
 }

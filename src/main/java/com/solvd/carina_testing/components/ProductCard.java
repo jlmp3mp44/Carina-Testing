@@ -11,6 +11,12 @@ public class ProductCard extends AbstractUIObject {
     @FindBy(xpath = "//span[@aria-label]")
     private ExtendedWebElement descriptionElement;
 
+    @FindBy(xpath = "//span[@class='product__brand']")
+    private ExtendedWebElement titleElement;
+
+    @FindBy(xpath = "//*[@data-qa-node='simple-to-basket']")
+    private ExtendedWebElement addToBagButton;
+
     public ProductCard(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
@@ -21,4 +27,16 @@ public class ProductCard extends AbstractUIObject {
     public String getDescriptionText(){
         return descriptionElement.getText();
     }
+
+    public ExtendedWebElement getTitleElement() {
+        return titleElement;
+    }
+    public String getTitleText(){
+        return titleElement.getText();
+    }
+
+    public ExtendedWebElement getAddToBagButton() {
+        return addToBagButton;
+    }
+
 }

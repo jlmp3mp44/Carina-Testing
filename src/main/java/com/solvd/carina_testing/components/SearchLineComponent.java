@@ -1,6 +1,6 @@
 package com.solvd.carina_testing.components;
 
-import com.solvd.carina_testing.SearchPage;
+import com.solvd.carina_testing.pages.SearchPage;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
 import org.openqa.selenium.SearchContext;

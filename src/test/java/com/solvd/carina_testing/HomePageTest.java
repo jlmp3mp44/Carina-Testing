@@ -1,7 +1,8 @@
 package com.solvd.carina_testing;
 
-import com.solvd.carina_testing.components.ProductCard;
-import com.solvd.carina_testing.components.SearchLineComponent;
+import com.solvd.carina_testing.components.*;
+import com.solvd.carina_testing.pages.HomePage;
+import com.solvd.carina_testing.pages.SearchPage;
 import com.zebrunner.carina.core.AbstractTest;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -15,10 +16,10 @@ public class HomePageTest extends AbstractTest {
     public void verifySearchLineTest() {
         String productName = "шампунь";
         SoftAssert sa =  new SoftAssert();
-        WebDriver driver = getDriver();
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(getDriver());
 
         homePage.open();
+        Assert.assertTrue(homePage.isPageOpened());
 
         SearchLineComponent searchLineComponent =  homePage.getHeader().getSearchLineComponent();
         Assert.assertTrue(searchLineComponent.getSearchButton().isElementPresent(2), "search button is not present");
@@ -27,6 +28,7 @@ public class HomePageTest extends AbstractTest {
                             "Search input has incorrect placeholder");
         searchLineComponent.typeSearchInputValue(productName);
         SearchPage searchPage = searchLineComponent.clickSearchButton();
+        Assert.assertTrue(searchPage.isPageOpened());
 
         List<ProductCard> cards = searchPage.getCards();
         for(ProductCard card: cards){
@@ -35,5 +37,40 @@ public class HomePageTest extends AbstractTest {
         }
 
         sa.assertAll();
+    }
+
+    @Test(testName = "verify search products by brand")
+    public void verifySearchByBrandTest(){
+        String brandName = "Gerber";
+        SoftAssert sa = new SoftAssert();
+        HomePage homePage =  new HomePage(getDriver());
+
+        homePage.open();
+        Assert.assertTrue(homePage.isPageOpened());
+
+        PropositionLine propositionLine =  homePage.getHeader().getPropositionLine();
+        Assert.assertTrue(propositionLine.getBrands().isElementPresent(),"brands are not present on the proposition line");
+        PopUpWindowBrands popUpWindowBrands  = propositionLine.clickBrands();
+        Assert.assertFalse(popUpWindowBrands.getBrandTitles().isEmpty(),"popup window with brands is not present");
+        SearchPage searchPage = popUpWindowBrands.clickBrandTitle(brandName);
+        Assert.assertTrue(searchPage.isPageOpened());
+
+        List<ProductCard> cards =  searchPage.getCards();
+        for(ProductCard card: cards){
+            sa.assertTrue(card.getTitleText().contains(brandName),
+                    String.format("Product with description '%s' does not contain brand name in his title", card.getDescriptionText()));
+        }
+        sa.assertAll();
+    }
+
+    @Test
+    public void verifyAddProductToTheBag(){
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        Assert.assertTrue(homePage.isPageOpened());
+
+        PopUpWindowBag popUpWindowBag = homePage.addProductToBag(5);
+        Assert.assertTrue(popUpWindowBag.getButtonCreateOrder().isElementPresent());
+        popUpWindowBag.getButtonCreateOrder().click();
     }
 }
