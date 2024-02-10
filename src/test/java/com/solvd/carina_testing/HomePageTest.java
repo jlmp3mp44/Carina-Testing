@@ -1,6 +1,7 @@
 package com.solvd.carina_testing;
 
 import com.solvd.carina_testing.components.*;
+import com.solvd.carina_testing.pages.CheckoutPage;
 import com.solvd.carina_testing.pages.HomePage;
 import com.solvd.carina_testing.pages.SearchPage;
 import com.zebrunner.carina.core.AbstractTest;
@@ -63,14 +64,15 @@ public class HomePageTest extends AbstractTest {
         sa.assertAll();
     }
 
-    @Test
-    public void verifyAddProductToTheBag(){
+    @Test(testName = "verify adding product to the bag and creating order")
+    public void verifyAddProductToTheBagAndCreateOrder(){
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened());
 
         PopUpWindowBag popUpWindowBag = homePage.addProductToBag(5);
         Assert.assertTrue(popUpWindowBag.getButtonCreateOrder().isElementPresent());
-        popUpWindowBag.getButtonCreateOrder().click();
+        CheckoutPage checkoutPage = popUpWindowBag.createOrder();
+        Assert.assertTrue(checkoutPage.isPageOpened());
     }
 }

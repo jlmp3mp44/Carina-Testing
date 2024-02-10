@@ -7,8 +7,6 @@ import org.openqa.selenium.support.FindBy;
 
 public class Header extends AbstractUIObject {
 
-
-
     @FindBy(xpath = "//*[@data-v-f0f2c96e]//*[@class='m-search-bar__wrapper']")
     private SearchLineComponent searchLineComponent;
 

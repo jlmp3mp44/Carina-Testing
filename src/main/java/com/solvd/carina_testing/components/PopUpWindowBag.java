@@ -1,5 +1,6 @@
 package com.solvd.carina_testing.components;
 
+import com.solvd.carina_testing.pages.CheckoutPage;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
 import jdk.dynalink.linker.LinkerServices;
@@ -11,7 +12,6 @@ import java.util.List;
 
 public class PopUpWindowBag extends AbstractUIObject {
 
-
     @FindBy(xpath = "//button[contains(text(), 'Зробити замовлення')]")
     private ExtendedWebElement buttonCreateOrder;
     public PopUpWindowBag(WebDriver driver, SearchContext searchContext) {
@@ -20,5 +20,9 @@ public class PopUpWindowBag extends AbstractUIObject {
 
     public ExtendedWebElement getButtonCreateOrder() {
         return buttonCreateOrder;
+    }
+    public CheckoutPage createOrder(){
+        buttonCreateOrder.click();
+        return new CheckoutPage(getDriver());
     }
 }

@@ -9,5 +9,6 @@ public class CheckoutPage extends AbstractPage {
     public CheckoutPage(WebDriver driver) {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_URL);
+        setPageURL("checkout/");
     }
 }
