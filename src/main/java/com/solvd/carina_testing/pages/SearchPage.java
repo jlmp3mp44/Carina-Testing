@@ -18,7 +18,6 @@ public class SearchPage extends AbstractPage {
     private ExtendedWebElement sortButton;
 
     public SearchPage(WebDriver driver) {
-
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(sortButton);

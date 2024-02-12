@@ -11,7 +11,7 @@ import java.util.List;
 
 public class PopUpWindowBrands extends AbstractUIObject {
 
-    @FindBy(xpath = "//*[contains(@class, 'sf-link')]")
+    @FindBy(xpath = "//*[contains(text(), 'Популярні бренди') and contains(@class, 'title')]/..//a[contains(text(), '%s')]")
     private List<ExtendedWebElement> brandTitles;
 
     public PopUpWindowBrands(WebDriver driver, SearchContext searchContext) {
@@ -19,9 +19,9 @@ public class PopUpWindowBrands extends AbstractUIObject {
     }
 
     public SearchPage clickBrandTitle(String title) {
-        for (ExtendedWebElement element : brandTitles) {
-            if (element.getText().contains(title)){//&& element.getAttribute("title").equals(title)) {
-                element.click();
+        for (ExtendedWebElement brandTitle : brandTitles) {
+            if (brandTitle.getText().contains(title)){//&& element.getAttribute("title").equals(title)) {
+                brandTitle.format(title).click();
                 return new SearchPage(getDriver());
             }
         }

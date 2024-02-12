@@ -16,7 +16,7 @@ public class HomePage extends AbstractPage {
     @FindBy(xpath = "//header")
     private Header header;
 
-    @FindBy(xpath = "//body//*[@class='o-market-category-list categories-wrapper__container']")
+    @FindBy(xpath = "//body//div[contains(@class, 'category-list')]")
     private ExtendedWebElement categoriesLine;
 
     @FindBy(xpath = "//*[@class='product__details']")
@@ -35,14 +35,14 @@ public class HomePage extends AbstractPage {
         return header;
     }
 
-    public ExtendedWebElement getCategoriesLine() {
-        return categoriesLine;
+    public boolean isCategoriesLinePresent() {
+        return categoriesLine.isElementPresent();
     }
 
     public PopUpWindowBag addProductToBag(int index){
         ProductCard productCard = productCards.get(index);
-        productCard.getAddToBagButton().click();
-        return getPopUpWindowBag();
+        productCard.addProductToBag();
+        return popUpWindowBag;
     }
 
     public List<ProductCard> getProductCards() {

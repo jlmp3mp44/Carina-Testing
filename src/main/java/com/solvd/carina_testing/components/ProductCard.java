@@ -14,29 +14,23 @@ public class ProductCard extends AbstractUIObject {
     @FindBy(xpath = "//span[@class='product__brand']")
     private ExtendedWebElement titleElement;
 
-    @FindBy(xpath = "//*[@data-qa-node='simple-to-basket']")
+    @FindBy(xpath = "//*[@class='product__details']//button//span[contains(text(), 'До кошика')]")
     private ExtendedWebElement addToBagButton;
 
     public ProductCard(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
-    public ExtendedWebElement getDescriptionElement() {
-        return descriptionElement;
-    }
     public String getDescriptionText(){
         return descriptionElement.getText();
     }
 
-    public ExtendedWebElement getTitleElement() {
-        return titleElement;
-    }
     public String getTitleText(){
         return titleElement.getText();
     }
 
-    public ExtendedWebElement getAddToBagButton() {
-        return addToBagButton;
+    public void addProductToBag() {
+        addToBagButton.click();
     }
 
 }

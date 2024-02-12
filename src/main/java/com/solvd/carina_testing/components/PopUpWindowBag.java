@@ -18,8 +18,8 @@ public class PopUpWindowBag extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    public ExtendedWebElement getButtonCreateOrder() {
-        return buttonCreateOrder;
+    public boolean isCreateOrderButtonPresent() {
+        return buttonCreateOrder.isElementPresent();
     }
     public CheckoutPage createOrder(){
         buttonCreateOrder.click();
