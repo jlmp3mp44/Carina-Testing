@@ -21,11 +21,11 @@ public class ProductCard extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    public String getDescriptionText(){
+    public String getDescriptionText() {
         return descriptionElement.getText();
     }
 
-    public String getTitleText(){
+    public String getTitleText() {
         return titleElement.getText();
     }
 

@@ -4,7 +4,6 @@ import com.solvd.carina_testing.components.Header;
 import com.solvd.carina_testing.components.PopUpWindowBag;
 import com.solvd.carina_testing.components.ProductCard;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -40,20 +39,21 @@ public class HomePage extends AbstractPage {
         return header;
     }
 
-    public PopUpWindowBag addProductToBag(int index){
+    public PopUpWindowBag addProductToBag(int index) {
         productCards.get(index).addProductToBag();
         return popUpWindowBag;
     }
 
-    public boolean isTrackOrderButtonPresent(){
+    public boolean isTrackOrderButtonPresent() {
         return trackOrderButton.isElementPresent();
     }
-    public TrackOrderPage clickButtonTrackOrder(){
+
+    public TrackOrderPage clickButtonTrackOrder() {
         trackOrderButton.click();
         return new TrackOrderPage(getDriver());
     }
 
-    public AllPromotionsPage clickAllPromotionsButton(){
+    public AllPromotionsPage clickAllPromotionsButton() {
         allPromotionsButton.click();
         return new AllPromotionsPage(getDriver());
     }

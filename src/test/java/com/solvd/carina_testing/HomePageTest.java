@@ -1,6 +1,9 @@
 package com.solvd.carina_testing;
 
-import com.solvd.carina_testing.components.*;
+import com.solvd.carina_testing.components.DropDownMenuBrands;
+import com.solvd.carina_testing.components.Header;
+import com.solvd.carina_testing.components.PopUpWindowBag;
+import com.solvd.carina_testing.components.ProductCard;
 import com.solvd.carina_testing.pages.*;
 import com.zebrunner.carina.core.AbstractTest;
 import org.testng.Assert;
@@ -17,24 +20,24 @@ public class HomePageTest extends AbstractTest {
 
     @Test(testName = "Verify search line test")
     public void verifySearchLineTest() {
-        SoftAssert softAssert =  new SoftAssert();
+        SoftAssert softAssert = new SoftAssert();
         HomePage homePage = new HomePage(getDriver());
 
         homePage.open();
-        Assert.assertTrue(homePage.isPageOpened(), "Home page isn`t open!");
+        Assert.assertTrue(homePage.isPageOpened(), "Home page is not open!");
 
         Header header = homePage.getHeader();
 
         Assert.assertTrue(header.isSearchButtonPresent(), "Search button is not present!");
-        Assert.assertTrue(header.isSearchInputPresent(),"Search input is not present!");
+        Assert.assertTrue(header.isSearchInputPresent(), "Search input is not present!");
         softAssert.assertEquals(header.getSearchInputPlaceholder(), "Введіть пошуковий запит або код товару",
-                            "Search input has incorrect placeholder!");
+                "Search input has incorrect placeholder!");
         header.typeSearchInputValue(PRODUCT_TITLE);
         SearchPage searchPage = header.clickSearchButton();
-        Assert.assertTrue(searchPage.isPageOpened(), "Search page isn`t open!");
+        Assert.assertTrue(searchPage.isPageOpened(), "Search page is not open!");
 
         List<ProductCard> cards = searchPage.getCards();
-        for(ProductCard card: cards){
+        for (ProductCard card : cards) {
             softAssert.assertTrue(card.getDescriptionText().contains(PRODUCT_TITLE.toLowerCase()),
                     String.format("Product with description '%s' does not contain product name in his description", card.getDescriptionText()));
         }
@@ -43,22 +46,22 @@ public class HomePageTest extends AbstractTest {
     }
 
     @Test(testName = "Verify search products by brand")
-    public void verifySearchByBrandTest(){
+    public void verifySearchByBrandTest() {
         SoftAssert softAssert = new SoftAssert();
-        HomePage homePage =  new HomePage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
 
         homePage.open();
-        Assert.assertTrue(homePage.isPageOpened(), "Home page isn`t open!");
+        Assert.assertTrue(homePage.isPageOpened(), "Home page is not open!");
 
 
         Header header = homePage.getHeader();
-        Assert.assertTrue(header.isBrandButtonPresent(),"Brands are not present on the proposition line!");
-        DropDownMenuBrands popUpWindowBrands  = header.clickBrands();
+        Assert.assertTrue(header.isBrandButtonPresent(), "Brands are not present on the proposition line!");
+        DropDownMenuBrands popUpWindowBrands = header.clickBrands();
         SearchPage searchPage = popUpWindowBrands.clickBrandTitle(BRAND_TITLE);
-        Assert.assertTrue(searchPage.isPageOpened(), "Search page isn`t open!");
+        Assert.assertTrue(searchPage.isPageOpened(), "Search page is not open!");
 
-        List<ProductCard> cards =  searchPage.getCards();
-        for(ProductCard card: cards){
+        List<ProductCard> cards = searchPage.getCards();
+        for (ProductCard card : cards) {
             softAssert.assertTrue(card.getTitleText().contains(BRAND_TITLE),
                     String.format("Product with description '%s' does not contain brand name in his title", card.getDescriptionText()));
         }
@@ -66,49 +69,49 @@ public class HomePageTest extends AbstractTest {
     }
 
     @Test(testName = "Verify adding product to the bag and creating order")
-    public void verifyAddProductToTheBagAndCreateOrder(){
+    public void verifyAddProductToTheBagAndCreateOrder() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
-        Assert.assertTrue(homePage.isPageOpened(), "Home page isn`t open!");
+        Assert.assertTrue(homePage.isPageOpened(), "Home page is not open!");
 
         PopUpWindowBag popUpWindowBag = homePage.addProductToBag(5);
-        Assert.assertTrue(popUpWindowBag.isCreateOrderButtonPresent(), "Create order button isn`t present!");
+        Assert.assertTrue(popUpWindowBag.isCreateOrderButtonPresent(), "Create order button is not present!");
 
         CheckoutPage checkoutPage = popUpWindowBag.createOrder();
-        Assert.assertTrue(checkoutPage.isPageOpened(), "Checkout page isn`t open!");
+        Assert.assertTrue(checkoutPage.isPageOpened(), "Checkout page is not open!");
     }
 
     @Test
-    public void verifyCheckOrder(){
-        HomePage homePage =  new HomePage(getDriver());
+    public void verifyCheckOrder() {
+        HomePage homePage = new HomePage(getDriver());
         homePage.open();
-        Assert.assertTrue(homePage.isPageOpened(), "Home page isn`t open!");
+        Assert.assertTrue(homePage.isPageOpened(), "Home page is not open!");
 
-        Assert.assertTrue(homePage.isTrackOrderButtonPresent(),"Track order button on the home page isn`t present!");
+        Assert.assertTrue(homePage.isTrackOrderButtonPresent(), "Track order button on the home page is not present!");
         TrackOrderPage trackOrderPage = homePage.clickButtonTrackOrder();
-        Assert.assertTrue(trackOrderPage.isPageOpened(), "Track page isn`t open!");
-        Assert.assertTrue(trackOrderPage.isInputOrderNumberlinePresent(), "input order number line isn`t present!");
+        Assert.assertTrue(trackOrderPage.isPageOpened(), "Track page is not open!");
+        Assert.assertTrue(trackOrderPage.isInputOrderNumberlinePresent(), "Input order number line is not present!");
 
         trackOrderPage.typeInputOrderNumber(ORDER_NUMBER);
 
         Assert.assertTrue(trackOrderPage.isTrackOrderButtonPresent(),
-                "Track order button on the track order page isn`t present!");
+                "Track order button on the track order page is not present!");
         trackOrderPage.clickTrackOrderButton();
 
-        Assert.assertTrue(trackOrderPage.isOrderDidntFoundTitlePresent(), "The title 'Order didn`t found' isn`t present!");
+        Assert.assertTrue(trackOrderPage.isOrderDidntFoundTitlePresent(), "The title 'Order did not found' is not present!");
     }
 
     @Test
-    public void verifyOpenPagePromotion(){
+    public void verifyOpenPagePromotion() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
-        Assert.assertTrue(homePage.isPageOpened(), "Home page isn`t open!");
+        Assert.assertTrue(homePage.isPageOpened(), "Home page is not open!");
 
         AllPromotionsPage allPromotionsPage = homePage.clickAllPromotionsButton();
-        Assert.assertTrue(allPromotionsPage.isPageOpened(), "All promotion page isn`t open!");
+        Assert.assertTrue(allPromotionsPage.isPageOpened(), "All promotion page is not open!");
 
         PromotionPage promotionPage = allPromotionsPage.clickOnThePromotion(PROMOTION_TITLE);
-        Assert.assertTrue(promotionPage.isPageOpened(), "Promotion page isn`t open");
+        Assert.assertTrue(promotionPage.isPageOpened(), "Promotion page is not open");
     }
 
 
