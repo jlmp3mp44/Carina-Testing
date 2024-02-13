@@ -25,9 +25,14 @@ public class HomePage extends AbstractPage {
     @FindBy(xpath = "//*[@class='m-modal-microcart-list']")
     private PopUpWindowBag popUpWindowBag;
 
+    @FindBy(xpath = "//span[contains(text(), 'Відстежити замовлення')]")
+    private ExtendedWebElement trackOrderButton;
+
+    @FindBy(xpath = "(//button[contains(text(), 'Всі акції')])[1]")
+    private ExtendedWebElement allPromotionsButton;
+
     public HomePage(WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(categoriesLine);
     }
 
@@ -35,21 +40,22 @@ public class HomePage extends AbstractPage {
         return header;
     }
 
-    public boolean isCategoriesLinePresent() {
-        return categoriesLine.isElementPresent();
-    }
-
     public PopUpWindowBag addProductToBag(int index){
-        ProductCard productCard = productCards.get(index);
-        productCard.addProductToBag();
+        productCards.get(index).addProductToBag();
         return popUpWindowBag;
     }
 
-    public List<ProductCard> getProductCards() {
-        return productCards;
+    public boolean isTrackOrderButtonPresent(){
+        return trackOrderButton.isElementPresent();
+    }
+    public TrackOrderPage clickButtonTrackOrder(){
+        trackOrderButton.click();
+        return new TrackOrderPage(getDriver());
     }
 
-    public PopUpWindowBag getPopUpWindowBag() {
-        return popUpWindowBag;
+    public AllPromotionsPage clickAllPromotionsButton(){
+        allPromotionsButton.click();
+        return new AllPromotionsPage(getDriver());
     }
+
 }

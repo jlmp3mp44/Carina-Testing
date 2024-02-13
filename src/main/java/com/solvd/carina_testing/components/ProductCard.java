@@ -14,7 +14,7 @@ public class ProductCard extends AbstractUIObject {
     @FindBy(xpath = "//span[@class='product__brand']")
     private ExtendedWebElement titleElement;
 
-    @FindBy(xpath = "//*[@class='product__details']//button//span[contains(text(), 'До кошика')]")
+    @FindBy(xpath = "//span[contains(text(), 'До кошика')]")
     private ExtendedWebElement addToBagButton;
 
     public ProductCard(WebDriver driver, SearchContext searchContext) {

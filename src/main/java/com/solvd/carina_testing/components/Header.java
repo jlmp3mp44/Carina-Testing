@@ -8,46 +8,50 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class Header extends AbstractUIObject {
-    @FindBy(xpath = "//*[@data-v-f0f2c96e]//*[@class='m-search-bar__wrapper']//*[@type='search']")
+
+    @FindBy(xpath = "//*[@type='search']")
     private ExtendedWebElement searchInput;
-    @FindBy(xpath = "//*[@data-v-f0f2c96e]//*[@class='m-search-bar__wrapper']//button[contains(text(), 'Пошук')]")
+
+    @FindBy(xpath = "//button[contains(text(), 'Пошук')]")
     private ExtendedWebElement searchButton;
 
-    @FindBy(xpath = "//*[@class='nav-horizontal']//*[@class='mega-brands__inner']")
-    private PopUpWindowBrands popUpWindowBrands;
-    @FindBy(xpath = "//*[@class='nav-horizontal']//span[contains(text(), 'Бренди')]")
-    private ExtendedWebElement brands;
+    @FindBy(xpath = "//*[@class='mega-brands__inner']")
+    private DropDownMenuBrands dropDownMenuBrands;
+
+    @FindBy(xpath = "//span[contains(text(), 'Бренди')]")
+    private ExtendedWebElement brandButton;
+
     public Header(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
-    public void typeSearchInputValue(String value){
+    public void typeSearchInputValue(String value) {
         searchInput.type(value);
     }
 
     public boolean isSearchInputPresent() {
         return searchInput.isElementPresent();
     }
-    public String getSearchInputPlaceholder(){
+
+    public String getSearchInputPlaceholder() {
         return searchInput.getAttribute("placeholder");
     }
 
     public boolean isSearchButtonPresent() {
         return searchButton.isElementPresent();
     }
-    public SearchPage clickSearchButton(){
+
+    public SearchPage clickSearchButton() {
         searchButton.click();
         return new SearchPage(getDriver());
     }
-    public PopUpWindowBrands clickBrands(){
-        brands.click();
-        return getPopUpWindowBrands();
-    }
-    public PopUpWindowBrands getPopUpWindowBrands() {
-        return popUpWindowBrands;
+
+    public DropDownMenuBrands clickBrands() {
+        brandButton.click();
+        return dropDownMenuBrands;
     }
 
-    public boolean isBrandsPresent() {
-        return brands.isElementPresent();
+    public boolean isBrandButtonPresent() {
+        return brandButton.isElementPresent();
     }
 }

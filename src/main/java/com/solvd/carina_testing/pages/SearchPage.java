@@ -11,15 +11,14 @@ import java.util.List;
 
 public class SearchPage extends AbstractPage {
 
-    @FindBy(xpath = "//*[contains(@class, 'product products__product-card')]")
+    @FindBy(xpath = "//*[contains(@class, 'products__product-card')]")
     private List<ProductCard> cards;
 
-    @FindBy(xpath = "//body//*[@id='sfSelect']")
+    @FindBy(xpath = "//*[@id='sfSelect']")
     private ExtendedWebElement sortButton;
 
     public SearchPage(WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(sortButton);
     }
 

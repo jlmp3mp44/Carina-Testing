@@ -6,13 +6,13 @@ import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class CheckoutPage extends AbstractPage {
+public class PromotionPage extends AbstractPage {
 
-    @FindBy(xpath = "//h3[contains(text(), 'Оформлення замовлення')]")
-    private ExtendedWebElement title;
+    @FindBy(xpath = "//h1[contains(@class, 'title')]")
+    private ExtendedWebElement promotionTitle;
 
-    public CheckoutPage(WebDriver driver) {
+    public PromotionPage(WebDriver driver) {
         super(driver);
-        setUiLoadedMarker(title);
+        setUiLoadedMarker(promotionTitle);
     }
 }
