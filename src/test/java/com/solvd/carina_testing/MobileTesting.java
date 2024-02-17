@@ -27,8 +27,8 @@ public class MobileTesting extends AbstractTest implements IMobileUtils {
     public void verifyDeleteTask(){
         TodayPage todayPage = new TodayPage(getDriver());
         int numOfTasksBeforeDelete = todayPage.getTaskCards().size();
-        Assert.assertTrue(todayPage.getTaskCards().get(2).isCheckBoxPresent());
-        todayPage.getTaskCards().get(2).deleteTask(2);
+        Assert.assertTrue(todayPage.getTaskCards().get(INDEX_TASK).isCheckBoxPresent(INDEX_TASK), "Check box is not present!");
+        todayPage.getTaskCards().get(INDEX_TASK).deleteTask(INDEX_TASK);
         int numOfTasksAfterDelete = todayPage.getTaskCards().size();
         Assert.assertTrue(numOfTasksAfterDelete < numOfTasksBeforeDelete, "Task was not deleted");
     }

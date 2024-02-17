@@ -17,15 +17,15 @@ public class TaskCard extends AbstractUIObject {
     @FindBy(xpath = "//*[@resource-id='com.todoist:id/text' and @text='%s']")
     private ExtendedWebElement createdTaskTitle;
 
-    @FindBy(xpath = "//*[@content-desc=\"Complete\"])[%d]")
+    @FindBy(xpath = "//(//*[@content-desc='Complete'])[%d]")
     private ExtendedWebElement checkBox;
 
     public boolean isCreatedTaskPresent(String titleTask){
         return createdTaskTitle.format(titleTask).isElementPresent();
     }
 
-    public boolean isCheckBoxPresent(){
-        return checkBox.isElementPresent();
+    public boolean isCheckBoxPresent(int index){
+        return checkBox.format(index).isElementPresent();
     }
 
     public void deleteTask(int index){
