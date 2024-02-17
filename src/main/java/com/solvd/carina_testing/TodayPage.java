@@ -9,34 +9,45 @@ import java.util.List;
 
 public class TodayPage extends AbstractPage {
 
-    @FindBy(xpath = "//*[@content-desc=\"Quick add\"]\n")
+    @FindBy(xpath = "//*[@content-desc='Quick add']")
     private ExtendedWebElement addTaskButton;
 
-    @FindBy(xpath = "(//*[@text=\"Today\"])[1]")
+    @FindBy(xpath = "(//*[@text='Today'])[1]")
     private ExtendedWebElement titleToday;
 
-    @FindBy(xpath = "//*[@resource-id=\"android:id/message\"]")
+    @FindBy(xpath = "//*[@resource-id='android:id/message']")
     private ExtendedWebElement inputTitleTaskLine;
 
-    @FindBy(xpath = "//*[@content-desc=\"Add\"]")
+    @FindBy(xpath = "//*[@content-desc='Add']")
     private ExtendedWebElement airplaneButton;
 
-    @FindBy(xpath = "(//*[@resource-id=\"com.todoist:id/item\"])")
+    @FindBy(xpath = "(//*[@resource-id='com.todoist:id/item'])")
     private List<TaskCard> taskCards;
+
+    @FindBy(xpath = "(//*[@resource-id='com.todoist:id/compose_navigation_holder']/*/*/*)")
+    private Footer footer;
+
+    @FindBy(xpath = "(//*[@resource-id='com.todoist:id/text'])[2]")
+    private ExtendedWebElement hideKeyboard;
+
+    @FindBy(xpath = "//*[@resource-id='com.todoist:id/compose_navigation_holder']/*/*/*/*[4]/*[1]")
+    private  ExtendedWebElement browseButton;
     public TodayPage(WebDriver driver) {
         super(driver);
     }
 
-    public void addNewTask(){
+    public void clickOnAddTaskButton(){
         addTaskButton.click();
     }
 
-    public boolean isTitleTodayPresent(){
+    public boolean isTodayPageOpened(){
         return titleToday.isElementPresent();
     }
     public void createNewTask(String titleTask){
+        inputTitleTaskLine.click();
         inputTitleTaskLine.type(titleTask);
         airplaneButton.click();
+        hideKeyboard.click();
     }
 
     public boolean isAirplaneButtonPresent(){
@@ -45,5 +56,22 @@ public class TodayPage extends AbstractPage {
 
     public List<TaskCard> getTaskCards() {
         return taskCards;
+    }
+
+    public Footer getFooter() {
+        return footer;
+    }
+    public boolean isListOfTasksPresent(){
+        return !taskCards.isEmpty();
+    }
+    public boolean isFooterPresent(){
+        return footer.isUIObjectPresent();
+    }
+
+    public boolean isHideKeyboardPresent(){
+        return hideKeyboard.isElementPresent();
+    }
+    public boolean isBrowsePageButtonPresent(){
+        return browseButton.isElementPresent();
     }
 }
