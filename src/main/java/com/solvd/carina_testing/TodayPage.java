@@ -24,7 +24,7 @@ public class TodayPage extends AbstractPage {
     @FindBy(xpath = "(//*[@resource-id='com.todoist:id/item'])")
     private List<TaskCard> taskCards;
 
-    @FindBy(xpath = "(//*[@resource-id='com.todoist:id/compose_navigation_holder']/*/*/*)")
+    @FindBy(xpath = "//*[@resource-id='com.todoist:id/compose_navigation_holder']/*/*/*")
     private Footer footer;
 
     @FindBy(xpath = "(//*[@resource-id='com.todoist:id/text'])[2]")
@@ -43,11 +43,11 @@ public class TodayPage extends AbstractPage {
     public boolean isTodayPageOpened(){
         return titleToday.isElementPresent();
     }
+
     public void createNewTask(String titleTask){
         inputTitleTaskLine.click();
         inputTitleTaskLine.type(titleTask);
         airplaneButton.click();
-        hideKeyboard.click();
     }
 
     public boolean isAirplaneButtonPresent(){
@@ -73,5 +73,9 @@ public class TodayPage extends AbstractPage {
     }
     public boolean isBrowsePageButtonPresent(){
         return browseButton.isElementPresent();
+    }
+    public BrowsePage clickOnBrowsePageButton(){
+        browseButton.click();
+        return new BrowsePage(getDriver());
     }
 }

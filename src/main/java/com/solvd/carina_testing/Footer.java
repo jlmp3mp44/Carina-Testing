@@ -11,10 +11,10 @@ public class Footer extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    @FindBy(xpath = "/*[3]/*[2]")
+    @FindBy(xpath = "/./*[3]/*[2]")
     private ExtendedWebElement searchPageButton;
 
-    @FindBy(xpath = "/*[4]/*[1]")
+    @FindBy(xpath = "/./*[4]/*[1]")
     private ExtendedWebElement browsePageButton;
 
     public boolean isSearchPageButtonPresent(){

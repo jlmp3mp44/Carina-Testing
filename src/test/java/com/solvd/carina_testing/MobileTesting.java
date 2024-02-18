@@ -26,6 +26,7 @@ public class MobileTesting extends AbstractTest implements IMobileUtils {
     @Test
     public void verifyDeleteTask(){
         TodayPage todayPage = new TodayPage(getDriver());
+        Assert.assertTrue(todayPage.isTodayPageOpened(), "Today page is not opened!");
         int numOfTasksBeforeDelete = todayPage.getTaskCards().size();
         Assert.assertTrue(todayPage.getTaskCards().get(INDEX_TASK).isCheckBoxPresent(INDEX_TASK), "Check box is not present!");
         todayPage.getTaskCards().get(INDEX_TASK).deleteTask(INDEX_TASK);
@@ -53,8 +54,21 @@ public class MobileTesting extends AbstractTest implements IMobileUtils {
         Assert.assertTrue(todayPage.isFooterPresent(), "Footer is not present!");
         Assert.assertTrue(todayPage.getFooter().isBrowsePageButtonPresent(), "Browse page button is not present!");
         BrowsePage browsePage = todayPage.getFooter().clickOnBrowsePageButton();
-        Assert.assertTrue(browsePage.isSettingsButtonPresent(), "Settings button is nor present");
+        Assert.assertTrue(browsePage.isSettingsButtonPresent(), "Settings button is not present");
         browsePage.clickSettingsButton();
+        Assert.assertTrue(browsePage.isSettingsListNotEmpty(), "List of settings is not present!");
+    }
+
+    @Test
+    public void verifyHomeProjectTasks(){
+        TodayPage todayPage =  new TodayPage(getDriver());
+        Assert.assertTrue(todayPage.isTodayPageOpened(), "Today page is not opened!");
+        Assert.assertTrue(todayPage.isFooterPresent(), "Footer is not present!");
+        Assert.assertTrue(todayPage.isBrowsePageButtonPresent(), "Browse page button is not present!");
+        BrowsePage browsePage = todayPage.clickOnBrowsePageButton();
+        Assert.assertTrue(browsePage.isHomeProjectButtonPresent(), "Home project button is not present!");
+        browsePage.clickHomeProjectButton();
+        Assert.assertTrue(browsePage.isTaskCardListNotEmpty());
     }
 
     @BeforeMethod
