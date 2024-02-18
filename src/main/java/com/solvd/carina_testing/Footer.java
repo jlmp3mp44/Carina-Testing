@@ -11,29 +11,27 @@ public class Footer extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    @FindBy(xpath = "/./*[3]/*[2]")
+    @FindBy(xpath = ".//*[3]/*[2]")
     private ExtendedWebElement searchPageButton;
 
-    @FindBy(xpath = "/./*[4]/*[1]")
+    @FindBy(xpath = ".//*[4]/*[1]")
     private ExtendedWebElement browsePageButton;
 
-    public boolean isSearchPageButtonPresent(){
+    public boolean isSearchPageButtonPresent() {
         return searchPageButton.isElementPresent();
     }
 
-    public SearchPage clickSearchPageButton(){
+    public SearchPage clickSearchPageButton() {
         searchPageButton.click();
         return new SearchPage(getDriver());
     }
 
-    public boolean isBrowsePageButtonPresent(){
+    public boolean isBrowsePageButtonPresent() {
         return browsePageButton.isElementPresent();
     }
 
-    public BrowsePage clickOnBrowsePageButton(){
+    public BrowsePage clickOnBrowsePageButton() {
         browsePageButton.click();
         return new BrowsePage(getDriver());
     }
-
-
 }

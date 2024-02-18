@@ -1,5 +1,6 @@
 package com.solvd.carina_testing;
 
+import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class TodayPage extends AbstractPage {
+public class TodayPage extends AbstractPage implements IMobileUtils {
 
     @FindBy(xpath = "//*[@content-desc='Quick add']")
     private ExtendedWebElement addTaskButton;
@@ -27,30 +28,26 @@ public class TodayPage extends AbstractPage {
     @FindBy(xpath = "//*[@resource-id='com.todoist:id/compose_navigation_holder']/*/*/*")
     private Footer footer;
 
-    @FindBy(xpath = "(//*[@resource-id='com.todoist:id/text'])[2]")
-    private ExtendedWebElement hideKeyboard;
-
-    @FindBy(xpath = "//*[@resource-id='com.todoist:id/compose_navigation_holder']/*/*/*/*[4]/*[1]")
-    private  ExtendedWebElement browseButton;
     public TodayPage(WebDriver driver) {
         super(driver);
     }
 
-    public void clickOnAddTaskButton(){
+    public void clickOnAddTaskButton() {
         addTaskButton.click();
     }
 
-    public boolean isTodayPageOpened(){
+    public boolean isTodayPageOpened() {
         return titleToday.isElementPresent();
     }
 
-    public void createNewTask(String titleTask){
+    public void createNewTask(String titleTask) {
         inputTitleTaskLine.click();
         inputTitleTaskLine.type(titleTask);
         airplaneButton.click();
+        hideKeyboard();
     }
 
-    public boolean isAirplaneButtonPresent(){
+    public boolean isAirplaneButtonPresent() {
         return airplaneButton.isElementPresent();
     }
 
@@ -61,21 +58,13 @@ public class TodayPage extends AbstractPage {
     public Footer getFooter() {
         return footer;
     }
-    public boolean isListOfTasksPresent(){
+
+    public boolean isListOfTasksPresent() {
         return !taskCards.isEmpty();
     }
-    public boolean isFooterPresent(){
+
+    public boolean isFooterPresent() {
         return footer.isUIObjectPresent();
     }
 
-    public boolean isHideKeyboardPresent(){
-        return hideKeyboard.isElementPresent();
-    }
-    public boolean isBrowsePageButtonPresent(){
-        return browseButton.isElementPresent();
-    }
-    public BrowsePage clickOnBrowsePageButton(){
-        browseButton.click();
-        return new BrowsePage(getDriver());
-    }
 }

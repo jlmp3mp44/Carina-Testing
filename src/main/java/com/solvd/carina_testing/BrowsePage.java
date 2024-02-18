@@ -12,10 +12,10 @@ public class BrowsePage extends AbstractPage {
         super(driver);
     }
 
-    @FindBy(xpath = "//*[@resource-id='com.todoist:id/content']/*/*/android.widget.Button")
+    @FindBy(xpath = "//*[@content-desc='Settings']")
     private ExtendedWebElement settingsButton;
 
-    @FindBy(xpath = "//*[@resource-id='com.todoist:id/recycler_view']/*/android.widget.RelativeLayout")
+    @FindBy(xpath = "//*[contains(@resource-id, 'recycler')]/*/android.widget.RelativeLayout")
     private List<ExtendedWebElement> settingsList;
 
     @FindBy(xpath = "//*[contains(@text, 'Home')]")
@@ -24,24 +24,27 @@ public class BrowsePage extends AbstractPage {
     @FindBy(xpath = "(//*[@resource-id='com.todoist:id/item'])")
     private List<TaskCard> taskCards;
 
-    public void clickSettingsButton(){
+    public void clickSettingsButton() {
         settingsButton.click();
     }
-    public boolean isSettingsButtonPresent(){
+
+    public boolean isSettingsButtonPresent() {
         return settingsButton.isElementPresent();
     }
-    public boolean isSettingsListNotEmpty(){
+
+    public boolean isSettingsListNotEmpty() {
         return !settingsList.isEmpty();
     }
-    public boolean isHomeProjectButtonPresent(){
+
+    public boolean isHomeProjectButtonPresent() {
         return homeProjectButton.isElementPresent();
     }
 
-    public void clickHomeProjectButton(){
+    public void clickHomeProjectButton() {
         homeProjectButton.click();
     }
-    public boolean isTaskCardListNotEmpty(){
+
+    public boolean isTaskCardListNotEmpty() {
         return !taskCards.isEmpty();
     }
-
 }

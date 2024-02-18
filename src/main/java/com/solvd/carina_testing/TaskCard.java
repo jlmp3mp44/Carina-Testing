@@ -6,8 +6,6 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
-
 public class TaskCard extends AbstractUIObject {
 
     public TaskCard(WebDriver driver, SearchContext searchContext) {
@@ -17,19 +15,19 @@ public class TaskCard extends AbstractUIObject {
     @FindBy(xpath = "//*[@resource-id='com.todoist:id/text' and @text='%s']")
     private ExtendedWebElement createdTaskTitle;
 
-    @FindBy(xpath = "//*[@content-desc='Complete'][%d]")
+    @FindBy(xpath = ".//*[@content-desc='Complete']")
     private ExtendedWebElement checkBox;
 
-    public boolean isCreatedTaskPresent(String titleTask){
+    public boolean isCreatedTaskPresent(String titleTask) {
         return createdTaskTitle.format(titleTask).isElementPresent();
     }
 
-    public boolean isCheckBoxPresent(int index){
-        return checkBox.format(index).isElementPresent();
+    public boolean isCheckBoxPresent() {
+        return checkBox.isElementPresent();
     }
 
-    public void deleteTask(int index){
-        checkBox.format(index).click();
+    public void deleteTask() {
+        checkBox.click();
     }
 
 }

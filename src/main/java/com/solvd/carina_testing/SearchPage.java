@@ -16,11 +16,11 @@ public class SearchPage extends AbstractPage {
         super(driver);
     }
 
-    public boolean isSearchPageOpened(){
+    public boolean isSearchPageOpened() {
         return searchTitle.isElementPresent();
     }
 
-    public TodayPage clickTodayTaskButton(){
+    public TodayPage clickTodayTaskButton() {
         todayTasksButton.click();
         return new TodayPage(getDriver());
     }
