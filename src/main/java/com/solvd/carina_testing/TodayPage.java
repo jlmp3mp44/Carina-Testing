@@ -25,7 +25,7 @@ public class TodayPage extends AbstractPage implements IMobileUtils {
     @FindBy(xpath = "(//*[@resource-id='com.todoist:id/item'])")
     private List<TaskCard> taskCards;
 
-    @FindBy(xpath = "//*[@resource-id='com.todoist:id/compose_navigation_holder']/*/*/*")
+    @FindBy(xpath = "//*[@resource-id='com.todoist:id/compose_navigation_holder']")
     private Footer footer;
 
     public TodayPage(WebDriver driver) {

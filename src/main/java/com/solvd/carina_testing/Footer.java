@@ -11,10 +11,10 @@ public class Footer extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    @FindBy(xpath = ".//*[3]/*[2]")
+    @FindBy(xpath = ".//android.widget.TextView[@text='Search']")
     private ExtendedWebElement searchPageButton;
 
-    @FindBy(xpath = ".//*[4]/*[1]")
+    @FindBy(xpath = ".//android.widget.TextView[@text='Browse']")
     private ExtendedWebElement browsePageButton;
 
     public boolean isSearchPageButtonPresent() {
